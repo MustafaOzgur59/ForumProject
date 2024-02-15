@@ -1,0 +1,23 @@
+@model ForumTopicModel
+
+<h1>Welcome to the @Model.Forum.Name Forum!</h1>
+
+@if(Model.Posts.Any()){
+    <table class="table table-bordered table-hover">
+        <tbody>
+            @foreach(var post in Model.Posts){
+                <tr>
+                    <td>@post.Title</td>
+                    <td>@post.AuthorName</td>
+                    <td>@post.DatePosted</td>
+                    <td>@post.ReplyCount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}else{
+    <div class="noPost">
+        <h4>No posts yet.</h4>
+        <span><a asp-action="Create" asp-controller="Post" asp-route-id="@Model.Forum.Id" >Create one ?</a></span>
+    </div>
+}

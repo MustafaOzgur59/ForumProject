@@ -1,4 +1,6 @@
+using BloggApp.Data.Concrete.EfCore;
 using ForumProject.Data.Concrete;
+using ForumProject.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +13,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("sql_connection"));
 });
 
+builder.Services.AddScoped<IForumService, ForumService>();
+
 var app = builder.Build();
+
+SeedData.TestVerileriniDoldur(app);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
