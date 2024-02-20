@@ -23,6 +23,28 @@ namespace BloggApp.Data.Concrete.EfCore
                     );
                     context.SaveChanges();
                 }
+/*                 if(!context.Users.Any()){
+                    context.Users.AddRange(
+                        new User{
+                            CreateDate= DateTime.Now,
+                            Email = "info@mozgur.com",
+                            IsActive = true,
+                            UserName = "deneme",
+                        }
+                    );
+                    context.SaveChanges();
+                }
+                if(!context.Posts.Any()){
+                    context.Posts.AddRange(
+                        new Post {
+                            Content = "First Python Post content",
+                            CreateTime = DateTime.Now,
+                            Title = "First Python post",
+                            User = context.Users.Where(user => user.UserName == "deneme").FirstOrDefault()
+                        }
+                    );
+                    context.SaveChanges();
+                } */
             }
         }
     }

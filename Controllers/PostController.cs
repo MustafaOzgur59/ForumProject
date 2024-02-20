@@ -25,7 +25,7 @@ namespace ForumProject.Controllers
                 AuthorName = reply.User.UserName,
                 AuthorId = reply.User.Id,
                 AuthorImageUrl = reply.User.ProfileImageUrl,
-                AuthorRating = reply.User.Rating,
+                AuthorRating = (int)reply.User.Rating,
                 Content = reply.Content,
                 CreatedAt = reply.CreateTime,
                 PostId = post.Id
@@ -37,12 +37,12 @@ namespace ForumProject.Controllers
                 AuthorId = post.User.Id,
                 AuthorName = post.User.UserName,
                 AuthorImageUrl = post.User.ProfileImageUrl,
-                AuthorRating = post.User.Rating,
+                AuthorRating = (int)post.User.Rating,
                 CreatedAt = post.CreateTime,
                 Content = post.Content,
                 Replies = replies
             };
-            return View(post);
+            return View(model);
         }
     }
 }

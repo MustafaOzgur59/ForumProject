@@ -1,6 +1,8 @@
 using BloggApp.Data.Concrete.EfCore;
 using ForumProject.Data.Concrete;
+using ForumProject.Entity;
 using ForumProject.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<IForumService, ForumService>();
 builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddIdentity<User, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddSignInManager<SignInManager<User>>()
+    .AddDefaultTokenProviders();
+
+builder.Services.ConfigureApplicationCookie(options =>{
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/AccesDenied";
+    options.SlidingExpiration = true;
+    options.ExpireTimeSpan = TimeSpan.FromDays(30);
+});
 
 var app = builder.Build();
 
@@ -32,7 +45,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
