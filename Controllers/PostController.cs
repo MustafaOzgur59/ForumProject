@@ -2,20 +2,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ForumProject.Entity;
 using ForumProject.Models.Post;
 using ForumProject.Models.Reply;
 using ForumProject.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol;
 
 namespace ForumProject.Controllers
 {
     public class PostController:Controller
     {
         private readonly IPostService _postService;
+        private readonly IForumService _forumService;
+        private readonly UserManager<User> _userManager;
 
-        public PostController(IPostService postService)
+        public PostController(IPostService postService, IForumService forumService, UserManager<User> userManager)
         {
             _postService = postService;
+            _forumService = forumService;
+            _userManager = userManager;
         }
 
         public IActionResult Index(int id){
@@ -30,19 +37,47 @@ namespace ForumProject.Controllers
                 CreatedAt = reply.CreateTime,
                 PostId = post.Id
             });
+            var user = post.User;
+            Console.WriteLine($"Username : {user.UserName}, Image : {user.ProfileImageUrl}");
             var model = new PostIndexModel
             {
                 Id = post.Id,
                 Title = post.Title,
                 AuthorId = post.User.Id,
-                AuthorName = post.User.UserName,
-                AuthorImageUrl = post.User.ProfileImageUrl,
-                AuthorRating = (int)post.User.Rating,
+                AuthorName = user.UserName!,
+                AuthorImageUrl = post.User.ProfileImageUrl!,
+                AuthorRating = (int)post.User.Rating!,
                 CreatedAt = post.CreateTime,
                 Content = post.Content,
                 Replies = replies
             };
             return View(model);
+        }
+
+        public IActionResult Create(int id){
+            var forum = _forumService.GetById(id);
+            var model = new CreatePostModel
+            {
+                ForumId = forum.Id,
+                ForumName = forum.Title
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreatePostModel model){
+            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User));
+
+            var post = new Post {
+                User = user,
+                Title = model.Title,
+                Content = model.Content,
+                CreateTime = DateTime.Now,
+                Forum = _forumService.GetById(model.ForumId)
+
+            };
+            await _postService.Add(post);
+            return RedirectToAction("Index","Post", new {id = post.Id});
         }
     }
 }

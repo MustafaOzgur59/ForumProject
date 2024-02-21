@@ -1,13 +1,13 @@
 @model ForumTopicModel
 
 <h1>Welcome to the @Model.Forum.Name Forum!</h1>
-
+<span><a asp-action="Create" asp-controller="Post" asp-route-id="@Model.Forum.Id" class="btn btn-primary">Create</a></span>
 @if(Model.Posts.Any()){
     <table class="table table-bordered table-hover">
         <tbody>
             @foreach(var post in Model.Posts){
                 <tr>
-                    <td>@post.Title</td>
+                    <td><a asp-action="Index" asp-controller="Post" asp-route-id="@post.Id">@post.Title</a></td>
                     <td>@post.AuthorName</td>
                     <td>@post.DatePosted</td>
                     <td>@post.ReplyCount</td>

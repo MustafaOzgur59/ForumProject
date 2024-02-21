@@ -1,14 +1,16 @@
 using ForumProject.Data.Concrete;
 using ForumProject.Entity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BloggApp.Data.Concrete.EfCore
 {
     public static class SeedData{
 
-        public static void TestVerileriniDoldur(IApplicationBuilder app){
+        public static async void TestVerileriniDoldur(IApplicationBuilder app){
             var context = app.ApplicationServices.CreateScope().ServiceProvider.GetService<ApplicationDbContext>();
-
+            var _userManager = app.ApplicationServices.CreateScope().ServiceProvider.GetService<UserManager<User>>();
+            var random = new Random();
             if(context != null){
                 if(context.Database.GetPendingMigrations().Any()){
                     context.Database.Migrate();
@@ -23,15 +25,34 @@ namespace BloggApp.Data.Concrete.EfCore
                     );
                     context.SaveChanges();
                 }
-/*                 if(!context.Users.Any()){
-                    context.Users.AddRange(
-                        new User{
-                            CreateDate= DateTime.Now,
-                            Email = "info@mozgur.com",
-                            IsActive = true,
-                            UserName = "deneme",
-                        }
-                    );
+                if(!context.Users.Any()){
+                    await _userManager.CreateAsync(new User
+                    {
+                        CreateDate = DateTime.Now,
+                        Email = "info@ahmet.com",
+                        IsActive = true,
+                        UserName = "ahmet",
+                        ProfileImageUrl = "~/img/1.jpg",
+                        Rating = random.Next(1,5)                    
+                    }, "Deneme123!");
+                    await _userManager.CreateAsync(new User
+                    {
+                        CreateDate = DateTime.Now,
+                        Email = "info@mozgur.com",
+                        IsActive = true,
+                        UserName = "deneme",
+                        ProfileImageUrl = "~/img/2.jpg",
+                        Rating = random.Next(1,5)     
+                    }, "Deneme123!");
+                    await _userManager.CreateAsync(new User
+                    {
+                        CreateDate = DateTime.Now,
+                        Email = "info@elif.com",
+                        IsActive = true,
+                        UserName = "elif",
+                        ProfileImageUrl = "~/img/3.jpg",
+                        Rating = random.Next(1,5)     
+                    }, "Deneme123!");
                     context.SaveChanges();
                 }
                 if(!context.Posts.Any()){
@@ -40,11 +61,40 @@ namespace BloggApp.Data.Concrete.EfCore
                             Content = "First Python Post content",
                             CreateTime = DateTime.Now,
                             Title = "First Python post",
-                            User = context.Users.Where(user => user.UserName == "deneme").FirstOrDefault()
+                            User = context.Users.Where(user => user.UserName == "deneme").First(),
+                            Forum = context.Forums.Where(f => f.Id == 1).First()
+                        },
+                        new Post {
+                            Content = "Content",
+                            CreateTime = DateTime.Now,
+                            Title = "Python Ml",
+                            User = context.Users.Where(user => user.UserName == "deneme").First(),
+                            Forum = context.Forums.Where(f => f.Id == 1).First()
+                        },
+                        new Post {
+                            Content = "Snake game using python",
+                            CreateTime = DateTime.Now,
+                            Title = "Snake Game",
+                            User = context.Users.Where(user => user.UserName == "deneme").First(),
+                            Forum = context.Forums.Where(f => f.Id == 1).First()
+                        },
+                        new Post {
+                            Content = "Pandas is a library used in data manipulation",
+                            CreateTime = DateTime.Now,
+                            Title = "How to use pandas",
+                            User = context.Users.Where(user => user.UserName == "deneme").First(),
+                            Forum = context.Forums.Where(f => f.Id == 1).First()
+                        },
+                        new Post {
+                            Content = "I cant seem to call matplotlib",
+                            CreateTime = DateTime.Now,
+                            Title = "How to fix this bug???",
+                            User = context.Users.Where(user => user.UserName == "deneme").First(),
+                            Forum = context.Forums.Where(f => f.Id == 1).First()
                         }
                     );
                     context.SaveChanges();
-                } */
+                }
             }
         }
     }

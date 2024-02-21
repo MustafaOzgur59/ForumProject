@@ -17,9 +17,10 @@ namespace ForumProject.Services
             _context = context;
         }
 
-        public Task Add(Post post)
+        public async Task Add(Post post)
         {
-            throw new NotImplementedException();
+            await _context.Posts.AddAsync(post);
+            await _context.SaveChangesAsync();
         }
 
         public Task Delete(int id)
@@ -47,6 +48,15 @@ namespace ForumProject.Services
             .First();
         }
 
+        public Post GetByTitle(string title){
+            return _context.Posts.Where(post => post.Title == title)
+            .Include(post => post.User)
+            .Include(post => post.PostReplies)
+                .ThenInclude(reply => reply.User)
+            .Include(post => post.Forum)
+            .First();
+        }
+
         public IEnumerable<Post> GetFilteredPosts(string searchQuery)
         {
             throw new NotImplementedException();
@@ -61,6 +71,7 @@ namespace ForumProject.Services
     public interface IPostService
     {
         Post GetById(int id);
+        Post GetByTitle(string title);
         IEnumerable<Post> GetAll();
         IEnumerable<Post> GetFilteredPosts(string searchQuery);
         IEnumerable<Post> GetPostsByForum(int id);
