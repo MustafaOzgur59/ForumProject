@@ -8,7 +8,11 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
@@ -18,5 +22,86 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+  background-color: #eee;
+  background-image: url("/images/bg/bg-1.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.navbar {
+  box-shadow: 0 5px 5px -3px #005;
+}
+
+.navbar li {
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+.bold-font {
+  font-weight: bold;
+}
+
+.homeSearchBar {
+  width: 100%;
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: 0px;
+  padding: 2px 4px 2px 16px;
+  height: 2.5em;
+  font-weight: bold;
+  transition: ease-in 0.3s;
+}
+
+.homeSearchBar:focus {
+  border: none;
+  outline: none;
+  transition: ease-in 0.3s;
+  color: #258cfb;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.subTitle {
+  color: #9a9696;
+}
+
+.postLogo {
+  display: inline-block;
+  border-radius: 3px;
+  margin-right: 18px;
+  width: 40px;
+  height: auto;
+  background-color: #ddb;
+}
+
+.postContent {
+  background-color: #def;
+}
+
+#forumTable {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.forumLogo {
+  width: 40px;
+  height: 40px;
+  float: left;
+  padding: 5px;
+  margin: 10px;
+  background-position: center;
+  background-size: 100%;
+}
+
+.postAuthorImage {
+  width: 40px;
+  height: 40px;
+  float: left;
+  padding: 5px;
+  margin: 10px;
+  background-position: center;
+  background-size: 100%;
 }

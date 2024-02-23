@@ -17,11 +17,11 @@ namespace BloggApp.Data.Concrete.EfCore
                 }
                 if(!context.Forums.Any()){
                     context.Forums.AddRange(
-                        new Forum {Title = "Python", Description = "A popular dynamic, strongly typed programming language", CreateTime = DateTime.Now,ImageUrl = "~/images/forum/py.jpg"},
-                        new Forum {Title = "C#", Description = "An object-oriented programming language for building applications on the .NET framwork", CreateTime = DateTime.Now,ImageUrl = "~/images/forum/c#.jpg"},
-                        new Forum {Title = "Haskell", Description = "A popular functional programming language",ImageUrl = "~/images/forum/haskell.jpg"},
-                        new Forum {Title = "Javascript", Description = "Multi-paradigm language based on the ECMAScript specification", CreateTime = DateTime.Now,ImageUrl = "~/images/forum/js.jpg"},
-                        new Forum {Title = "Go", Description = "Open source statically typed programming language", CreateTime = DateTime.Now,ImageUrl = "~/images/forum/go.jpg"}
+                        new Forum {Title = "Python", Description = "A popular dynamic, strongly typed programming language", CreateTime = DateTime.Now,ImageUrl = "/images/forum/python.jpg"},
+                        new Forum {Title = "C#", Description = "An object-oriented programming language for building applications on the .NET framwork", CreateTime = DateTime.Now,ImageUrl = "/images/forum/c#.jpg"},
+                        new Forum {Title = "Haskell", Description = "A popular functional programming language",ImageUrl = "/images/forum/haskell.jpg"},
+                        new Forum {Title = "Javascript", Description = "Multi-paradigm language based on the ECMAScript specification", CreateTime = DateTime.Now,ImageUrl = "/images/forum/js.jpg"},
+                        new Forum {Title = "Go", Description = "Open source statically typed programming language", CreateTime = DateTime.Now,ImageUrl = "/images/forum/go.jpg"}
                     );
                     context.SaveChanges();
                 }
@@ -32,7 +32,7 @@ namespace BloggApp.Data.Concrete.EfCore
                         Email = "info@ahmet.com",
                         IsActive = true,
                         UserName = "ahmet",
-                        ProfileImageUrl = "~/img/1.jpg",
+                        ProfileImageUrl = "/images/user/python.jpg",
                         Rating = random.Next(1,5)                    
                     }, "Deneme123!");
                     await _userManager.CreateAsync(new User
@@ -41,7 +41,7 @@ namespace BloggApp.Data.Concrete.EfCore
                         Email = "info@mozgur.com",
                         IsActive = true,
                         UserName = "deneme",
-                        ProfileImageUrl = "~/img/2.jpg",
+                        ProfileImageUrl = "/images/user/python.jpg",
                         Rating = random.Next(1,5)     
                     }, "Deneme123!");
                     await _userManager.CreateAsync(new User
@@ -50,7 +50,7 @@ namespace BloggApp.Data.Concrete.EfCore
                         Email = "info@elif.com",
                         IsActive = true,
                         UserName = "elif",
-                        ProfileImageUrl = "~/img/3.jpg",
+                        ProfileImageUrl = "/images/user/python.jpg",
                         Rating = random.Next(1,5)     
                     }, "Deneme123!");
                     context.SaveChanges();

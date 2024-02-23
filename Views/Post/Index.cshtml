@@ -1,26 +1,70 @@
 @model ForumProject.Models.Post.PostIndexModel;
-
-<h1>@Model.Title</h1>
-<div>
-    Author : @Model.AuthorName (@Model.AuthorRating)
-    Created : @Model.CreatedAt
-</div>
-
-<div>
-    @Model.Content
-</div>
-
-@if(@Model.Replies.Any()){
-    @foreach(var reply in Model.Replies){
+<div class="container postContent">
+    <div class="row mb-3 p-4 bg-black text-white">
         <div>
-            <div>
-                Reply Author: @reply.AuthorName
-                Reply Created : @reply.CreatedAt
+            <span class="postIndexTitle">
+                @Model.Title
+            </span>
+            <span>
+                <a asp-controller="Forum" asp-action="Topic" asp-route-id="@Model.ForumId" class="btn btn-dark text-white">Back to @Model.ForumName forum</a>
+            </span>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-3 postAuthorContainer">
+            <div class="postAuthorImage" style="background-image: url(@Model.AuthorImageUrl);"></div>
+            <a asp-controller="Profile" asp-action="Detail" asp-route-id="@Model.AuthorId" class="text-dark bold-font">
+                @Model.AuthorName
+            </a>
+            <span class="d-block mt-1">@Model.CreatedAt</span>
+        </div>
+        <div class="col-md-9 postContentContainer">
+            <div class="postContent mt-1">
+                @Html.Raw(Model.Content)
             </div>
-            <div>
-                Reply : @reply.Content
-            </div>
+        </div>
+    </div>
+    <div class="row mb-3" id="reply"></div>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="row">
+            <span>
+                <a asp-controller="Reply" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newReply">
+                    Post Reply
+                </a>
+            </span>
         </div>
     }
 
-}
+    @if (Model.Replies.Any())
+    {
+        foreach (var reply in Model.Replies)
+        {
+            <div class="row replyContent">
+                <hr>
+                <div class="col-md-3 replyAuthorContainer">
+                    <div class="postAuthorImage" style="background-image: url(@reply.AuthorImageUrl)"></div>
+                    <a asp-controller="Profile" asp-action="Detail" asp-route-id="@reply.AuthorId">
+                        @reply.AuthorName
+                    </a>
+                    <span>@reply.CreatedAt</span>
+                </div>
+                <div class="col-md-9 replyContentContainer">
+                    <div class="postContent">
+                        @Html.Raw(reply.Content)
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="noPosts">
+            <hr>
+            <h3 class="text-center">
+                There are no replies to this post.<br />
+            </h3>
+        </div>
+    }
+</div>

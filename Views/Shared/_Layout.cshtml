@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-default bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Forum" asp-action="Index">ForumProject</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -20,26 +20,39 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Forum" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Forum" asp-action="Index">Forums</a>
                         </li>
                     </ul>
                     <ul class="ms-auto navbar-nav">
                        @if(User.Identity!.IsAuthenticated){
                             <li class="nav-item">
-                                <a href="#" class="nav-link">@User.Identity.Name</a>
+                                <a href="#" class="nav-link font-weight-bold text-dark">@User.Identity.Name</a>
+                            </li>
+                            <li class="dropdown">
+                                <button class="btn dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="bold-font text-dark">Settings</span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="font-weight-bold text-dark" asp-action="Detail" asp-controller="Profile">My Profile</a></li>
+                                    @if(User.IsInRole("admin")){
+                                        <li><a class="dropdown-item" asp-action="Create" asp-controller="Forum">Create Forum</a></li>
+                                        <li><a class="dropdown-item" asp-action="Index" asp-controller="Profile" >View Users</a></li>
+                                    }
+
+                                </ul>
                             </li>
                             <li class="nav-item">
-                                <a href="/account/logout" class="nav-link">Logout</a>
+                                <a href="/account/logout" class="nav-link text-dark">Logout</a>
                             </li>
                        } else {
                             <li class="nav-item">
-                                <a href="/account/login" class="nav-link">Login</a>
+                                <a href="/account/login" class="nav-link text-dark">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a href="/account/register" class="nav-link">Register</a>
+                                <a href="/account/register" class="nav-link text-dark">Register</a>
                             </li>
                        }
                     </ul>

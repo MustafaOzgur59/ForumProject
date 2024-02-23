@@ -18,5 +18,7 @@ namespace ForumProject.Models.Post
         public DateTime CreatedAt{ get; set; }
         public String? Content{ get; set; }
         public IEnumerable<PostReplyModel> Replies{ get; set; }
+        public String? ForumName { get; set; }
+        public int ForumId{ get; set; }
     }
 }

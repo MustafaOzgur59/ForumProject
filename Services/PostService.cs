@@ -35,7 +35,10 @@ namespace ForumProject.Services
 
         public IEnumerable<Post> GetAll()
         {
-            throw new NotImplementedException();
+             return _context.Posts
+                .Include(post => post.User)
+                .Include(post => post.PostReplies).ThenInclude(reply => reply.User)
+                .Include(post => post.Forum);
         }
 
         public Post GetById(int id)
@@ -66,6 +69,10 @@ namespace ForumProject.Services
         {
             return _context.Forums.Where(forum => forum.Id == id).FirstOrDefault().Posts;
         }
+
+        public IEnumerable<Post> GetLatestPosts(int v){
+            return GetAll().OrderByDescending(p => p.CreateTime).Take(v).ToList();
+        }
     }
 
     public interface IPostService
@@ -79,5 +86,6 @@ namespace ForumProject.Services
         Task Add(Post post);
         Task Delete(int id);
         Task EditPostContent(int id, string newContent);
+        IEnumerable<Post> GetLatestPosts(int v);
     }
 }

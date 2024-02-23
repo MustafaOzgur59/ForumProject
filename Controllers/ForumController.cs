@@ -29,8 +29,9 @@ namespace ForumProject.Controllers
             return View(forumIndex);
         }
 
-        public IActionResult Topic(int id){
+        public IActionResult Topic(int id, string searchQuery){
             var forum = _forumService.GetById(id);
+            Console.WriteLine($"Forum id : {forum.Id}");
             var posts = forum.Posts;
             var postListings = posts.Select(post => new PostListModel
             {
@@ -61,6 +62,43 @@ namespace ForumProject.Controllers
                 }
             };
             return View(topicModel);
+        }
+
+        [HttpPost]
+        public IActionResult Search(int Id, string searchQuery){
+            Console.WriteLine($"Forum id : {Id}, searchQuery : {searchQuery}");
+            var forum = _forumService.GetById(Id);
+            var postsByQuery = forum.Posts.Where(p => 
+                p.Title.Contains(searchQuery,StringComparison.CurrentCultureIgnoreCase) || p.Content.Contains(searchQuery,StringComparison.CurrentCultureIgnoreCase)
+                
+            ).Select(post => new PostListModel
+            {
+                Id = post.Id,
+                AuthorId = post.User.Id,
+                AuthorName = post.User.UserName,
+                AuthorRating = post.User.Rating.ToString(),
+                Title = post.Title,
+                DatePosted = post.CreateTime,
+                ReplyCount = post.PostReplies.Count(),
+                Forum = new ForumViewModel{
+                    Id = forum.Id,
+                    Name = forum.Title,
+                    Description = forum.Description,
+                    ImageUrl = forum.ImageUrl
+                }
+            }).ToList();
+            var topicModel = new ForumTopicModel
+            {
+                Posts = postsByQuery,
+                Forum = new ForumViewModel
+                {
+                    Id = forum.Id,
+                    Name = forum.Title,
+                    Description = forum.Description,
+                    ImageUrl = forum.ImageUrl
+                }
+            };
+            return View("Topic", topicModel);
         }
     }
 }

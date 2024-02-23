@@ -13,6 +13,42 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\images\\bg\\bg-1.jpg",
+      "PackagePath": "staticwebassets\\images\\bg\\bg-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\images\\forum\\c#.jpg",
+      "PackagePath": "staticwebassets\\images\\forum\\c#.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\images\\forum\\go.jpg",
+      "PackagePath": "staticwebassets\\images\\forum\\go.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\images\\forum\\haskell.jpg",
+      "PackagePath": "staticwebassets\\images\\forum\\haskell.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\images\\forum\\js.jpg",
+      "PackagePath": "staticwebassets\\images\\forum\\js.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\images\\forum\\logo.jpg",
+      "PackagePath": "staticwebassets\\images\\forum\\logo.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\images\\forum\\python.jpg",
+      "PackagePath": "staticwebassets\\images\\forum\\python.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\images\\forum\\rust.png",
+      "PackagePath": "staticwebassets\\images\\forum\\rust.png"
+    },
+    {
+      "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\images\\user\\python.jpg",
+      "PackagePath": "staticwebassets\\images\\user\\python.jpg"
+    },
+    {
       "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

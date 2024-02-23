@@ -1,23 +1,71 @@
 @model ForumTopicModel
 
-<h1>Welcome to the @Model.Forum.Name Forum!</h1>
-<span><a asp-action="Create" asp-controller="Post" asp-route-id="@Model.Forum.Id" class="btn btn-primary">Create</a></span>
-@if(Model.Posts.Any()){
-    <table class="table table-bordered table-hover">
-        <tbody>
-            @foreach(var post in Model.Posts){
-                <tr>
-                    <td><a asp-action="Index" asp-controller="Post" asp-route-id="@post.Id">@post.Title</a></td>
-                    <td>@post.AuthorName</td>
-                    <td>@post.DatePosted</td>
-                    <td>@post.ReplyCount</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}else{
-    <div class="noPost">
-        <h4>No posts yet.</h4>
-        <span><a asp-action="Create" asp-controller="Post" asp-route-id="@Model.Forum.Id" >Create one ?</a></span>
+<div class="container bodyContent">
+    <div class="row sectionHeader mb-2">
+        <span class="fw-bold fs-3 "> 
+            <div class="forumLogo" style="background-image: url(@Model.Forum.ImageUrl);"></div>
+            <p class="d-flex align-items-center" style="height: 100%;">Welcome to the @Model.Forum.Name Forum</p>
+        </span>
+
+        @if(User.Identity.IsAuthenticated){
+            <span>
+                <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">Create Post</a>
+            </span>
+        }
+        <form asp-asp-controller="Forum" asp-action="Search" method="Post">
+            <div class="searchForm">
+                <input type="hidden" asp-for="@Model.Forum.Id" name="id">
+                <input type="text" placeholder="Search" asp-for="SearchQuery" onfocus="clearSearchBar(this)" >
+                <button type="submit">Search</button>
+            </div>
+
+        </form>
     </div>
+    <div class="row postContent">
+        @if(Model.Posts.Any()){
+            <table class="table table-hover table-bordered" id="forumPostsTable">
+                <tbody>
+                    <p class="text-end">Reply Count</p>
+                    @foreach(var post in Model.Posts){
+                        <tr>
+                            <td>
+                                <div class="postData">
+                                    <div class="postTitle">
+                                        <a asp-action="Index" asp-controller="Post" asp-route-id="@post.Id">@post.Title</a>
+                                    </div>
+                                    <div class="postAuthorData">
+                                        <div>
+                                            <span class="postAuthor">
+                                                Author :
+                                                <a asp-action="Detail" asp-controller="Profile" asp-route-id="@post.AuthorId">  @post.AuthorName</a>
+                                            </span>
+                                            <span class="authorRating"> Rating : @post.AuthorRating</span>
+                                            <span class="postDate"> Date : @post.DatePosted</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="postReplyCount">
+                                    @post.ReplyCount
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        } else{
+            <div class="noPosts">
+                No posts yet.
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        function clearSearchBar(target){
+            target.value = "";
+        }
+    </script>
 }

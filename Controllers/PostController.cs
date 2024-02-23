@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ForumProject.Entity;
 using ForumProject.Models.Post;
 using ForumProject.Models.Reply;
 using ForumProject.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using NuGet.Protocol;
 
 namespace ForumProject.Controllers
 {
@@ -38,7 +33,6 @@ namespace ForumProject.Controllers
                 PostId = post.Id
             });
             var user = post.User;
-            Console.WriteLine($"Username : {user.UserName}, Image : {user.ProfileImageUrl}");
             var model = new PostIndexModel
             {
                 Id = post.Id,
@@ -49,7 +43,9 @@ namespace ForumProject.Controllers
                 AuthorRating = (int)post.User.Rating!,
                 CreatedAt = post.CreateTime,
                 Content = post.Content,
-                Replies = replies
+                Replies = replies,
+                ForumName = post.Forum.Title,
+                ForumId = post.Forum.Id
             };
             return View(model);
         }
