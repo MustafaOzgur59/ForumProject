@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject UserManager<ForumProject.Entity.User> _userManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -36,8 +38,12 @@
                                     <span class="bold-font text-dark">Settings</span>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="font-weight-bold text-dark" asp-action="Detail" asp-controller="Profile">My Profile</a></li>
-                                    @if(User.IsInRole("admin")){
+                                    <li role="separator" class="divider"></li>
+                                    <li class="dropdown-header">Profile</li>
+                                    <li><a class="dropdown-item" asp-action="Detail" asp-controller="Profile" asp-route-id="@_userManager.GetUserId(User)">My Profile</a></li>
+                                    @if(User.IsInRole("Admin")){
+                                        <li role="separator" class="divider"></li>
+                                        <li class="dropdown-header">Admin</li>
                                         <li><a class="dropdown-item" asp-action="Create" asp-controller="Forum">Create Forum</a></li>
                                         <li><a class="dropdown-item" asp-action="Index" asp-controller="Profile" >View Users</a></li>
                                     }

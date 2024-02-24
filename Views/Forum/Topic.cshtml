@@ -2,23 +2,22 @@
 
 <div class="container bodyContent">
     <div class="row sectionHeader mb-2">
-        <span class="fw-bold fs-3 "> 
+        <div class="fw-bold fs-3"> 
             <div class="forumLogo" style="background-image: url(@Model.Forum.ImageUrl);"></div>
-            <p class="d-flex align-items-center" style="height: 100%;">Welcome to the @Model.Forum.Name Forum</p>
-        </span>
-
-        @if(User.Identity.IsAuthenticated){
-            <span>
-                <a asp-controller="Post" asp-action="Create" asp-route-id="@Model.Forum.Id">Create Post</a>
-            </span>
+            <span style="height: 100%;">Welcome to the @Model.Forum.Name Forum</span>
+            @if(User.Identity.IsAuthenticated){
+            <span class="btn btn-primary">
+                <a asp-controller="Post" asp-action="Create" class="text-black fw-bold" asp-route-id="@Model.Forum.Id">Create Post</a>
+            </span class="btn btn-primary">
         }
+        </div>
+
         <form asp-asp-controller="Forum" asp-action="Search" method="Post">
             <div class="searchForm">
                 <input type="hidden" asp-for="@Model.Forum.Id" name="id">
                 <input type="text" placeholder="Search" asp-for="SearchQuery" onfocus="clearSearchBar(this)" >
                 <button type="submit">Search</button>
             </div>
-
         </form>
     </div>
     <div class="row postContent">

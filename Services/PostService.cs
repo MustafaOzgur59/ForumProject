@@ -88,6 +88,16 @@ namespace ForumProject.Services
         public IEnumerable<Post> GetLatestPosts(int v){
             return GetAll().OrderByDescending(p => p.CreateTime).Take(v).ToList();
         }
+
+        public IEnumerable<Post> GetByUser(string id)
+        {
+            return _context.Posts.Where(post => post.User.Id == id)
+            .Include(post => post.User)
+            .Include(post => post.PostReplies)
+                .ThenInclude(reply => reply.User)
+            .Include(post => post.Forum)
+            .ToList();
+        }
     }
 
     public interface IPostService
@@ -103,5 +113,6 @@ namespace ForumProject.Services
         IEnumerable<Post> GetLatestPosts(int v);
 
         Task addPostComment(int postId, string replyContent);
+        IEnumerable<Post> GetByUser(string id);
     }
 }

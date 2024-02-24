@@ -18,6 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IForumService, ForumService>();
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<ISearchService, SearchService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddSignInManager<SignInManager<User>>()
@@ -28,6 +29,10 @@ builder.Services.ConfigureApplicationCookie(options =>{
     options.AccessDeniedPath = "/Account/AccesDenied";
     options.SlidingExpiration = true;
     options.ExpireTimeSpan = TimeSpan.FromDays(30);
+});
+
+builder.Services.AddAuthorization(options => {
+    options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
 });
 
 var app = builder.Build();

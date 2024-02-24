@@ -1,0 +1,53 @@
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<ForumProject.Entity.User> UserManager;
+@model ForumProject.Models.User.ProfileModel;
+
+<div class="container content">
+    <div class="row sectionHeader">
+        <h3>User Profile</h3>
+        @if(User.IsInRole("Admin")){
+            // Todo : Deactivate user.
+        }
+    </div>
+    @if (Context.User.Identity.IsAuthenticated)
+    {
+        <div class="row userProfile">
+            <div class="col-md-4">
+                <div id="userProfileImage" style="background-image: url(@Model.ProfileImageUrl); background-size:100%;"></div>
+                @if (Context.User.Identity.Name == Model.UserName)
+                {
+                    <form method="post" enctype="multipart/form-data" asp-controller="Profile" asp-action="UploadProfileImage">
+                        <div id="upload">
+                            <label class="btn btn-default btn-file">
+                                Browse <input type="file" name="file" style="display: none;">
+                            </label>
+                        </div>
+                        <button type="submit" id="btn-profile" class="btn btn-primary">Submit</button>
+                    </form>
+                }
+            </div>
+            <div class="col-md-8">
+                <span id="userName" style="font-weight: bold; font-size: large;">@Model.UserName</span>
+                @if (User.IsInRole("Admin"))
+                {
+                    <span class="isAdmin">Admin</span>
+                }
+                <span id="userRating">Current Rating: @Model.UserRating</span>
+                <span id="userEmailLabel">Email: @Model.Email</span>
+                <span id="userCreatedLabel">Member Since: @Model.CreateDate</span>
+                <span id="userActiveLabel">
+                    Status:
+                    <span>Active</span>
+                    @*@if (!@Model.IsActive)
+                    {
+                        <span class="inactiveUser">Inactive</span>
+                    }
+                    else
+                    {
+                        <span>Active</span>
+                    }*@
+                </span>
+            </div>
+        </div>
+    }
+</div>

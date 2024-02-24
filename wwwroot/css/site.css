@@ -105,3 +105,45 @@ a {
   background-position: center;
   background-size: 100%;
 }
+
+.userProfile {
+  padding: 32px 0 64px 24px;
+  background-color: #fff;
+}
+
+.sectionHeader {
+  background-color: #192620;
+  /*background-color: rgba(0, 0, 0, 0.9);*/
+  padding: 8px 0 24px 24px;
+}
+
+.sectionHeading {
+  color: white;
+  font-size: 1.3em;
+  font-family: "Roboto";
+  padding: 16px 0 16px 0;
+  border-bottom: 1px solid #335;
+  margin-bottom: 12px;
+}
+
+#userEmailLabel,
+#userBioLabel,
+#userCreatedLabel,
+#userRating,
+#userActiveLabel {
+  display: block;
+  color: #444;
+  font-family: "Roboto";
+  padding-top: 3px;
+}
+
+.btn-file {
+  color: white;
+  background-color: #4fc3f7;
+  transition: ease-in 0.3s;
+}
+
+.btn-file:hover {
+  background-color: #039be5;
+  transition: ease-in 0.3s;
+}
