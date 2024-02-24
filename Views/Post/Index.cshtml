@@ -25,18 +25,6 @@
         </div>
     </div>
     <div class="row mb-3" id="reply"></div>
-
-    @if (User.Identity.IsAuthenticated)
-    {
-        <div class="row">
-            <span>
-                <a asp-controller="Reply" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-newReply">
-                    Post Reply
-                </a>
-            </span>
-        </div>
-    }
-
     @if (Model.Replies.Any())
     {
         foreach (var reply in Model.Replies)
@@ -65,6 +53,24 @@
             <h3 class="text-center">
                 There are no replies to this post.<br />
             </h3>
+        </div>
+    }
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="row">
+            <div>
+                <h4>Yorum Ekle</h4>
+                <form asp-action="addComment" asp-controller="Post" method="post">
+                    <input type="hidden" name="PostId" id="PostId" value="@Model.Id">
+                    <div class="col-md-12">
+                        <label for="Text" class="form-label">Yorum</label>
+                        <textarea type="text" name="replyContent" id="Text" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="col-md-12 my-3">
+                        <button id="btnYorumKayit" type="submit" class="btn btn-primary">Yorum yap</button>
+                    </div>
+                </form>
+            </div>
         </div>
     }
 </div>

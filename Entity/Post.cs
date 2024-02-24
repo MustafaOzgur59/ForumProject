@@ -1,3 +1,4 @@
+using System.Collections;
 using System.ComponentModel.DataAnnotations;
 
 namespace ForumProject.Entity
@@ -11,6 +12,6 @@ namespace ForumProject.Entity
         public DateTime CreateTime { get; set; }
         public virtual User User { get; set; }
         public virtual Forum Forum { get; set; }
-        public virtual IEnumerable<PostReply> PostReplies { get; set; }
+        public virtual ICollection<PostReply> PostReplies { get; set; } = new List<PostReply>();
     }
 }

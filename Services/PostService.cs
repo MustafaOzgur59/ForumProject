@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ForumProject.Data.Concrete;
 using ForumProject.Entity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace ForumProject.Services
@@ -11,10 +12,14 @@ namespace ForumProject.Services
     public class PostService : IPostService
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<User> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public PostService(ApplicationDbContext context)
+        public PostService(ApplicationDbContext context, UserManager<User> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _userManager = userManager;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task Add(Post post)
@@ -31,6 +36,21 @@ namespace ForumProject.Services
         public Task EditPostContent(int id, string newContent)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task addPostComment(int postId, string replyContent){
+            var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var post = GetById(postId);
+            var postReply = new PostReply
+            {
+                Content = replyContent,
+                CreateTime = DateTime.Now,
+                Post = post,
+                User = user
+            };
+            post.PostReplies.Add(postReply);
+            await _context.SaveChangesAsync();
+            Console.WriteLine("post yorumu yapildi");
         }
 
         public IEnumerable<Post> GetAll()
@@ -60,11 +80,6 @@ namespace ForumProject.Services
             .First();
         }
 
-        public IEnumerable<Post> GetFilteredPosts(string searchQuery)
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<Post> GetPostsByForum(int id)
         {
             return _context.Forums.Where(forum => forum.Id == id).FirstOrDefault().Posts;
@@ -80,12 +95,13 @@ namespace ForumProject.Services
         Post GetById(int id);
         Post GetByTitle(string title);
         IEnumerable<Post> GetAll();
-        IEnumerable<Post> GetFilteredPosts(string searchQuery);
         IEnumerable<Post> GetPostsByForum(int id);
 
         Task Add(Post post);
         Task Delete(int id);
         Task EditPostContent(int id, string newContent);
         IEnumerable<Post> GetLatestPosts(int v);
+
+        Task addPostComment(int postId, string replyContent);
     }
 }

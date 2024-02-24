@@ -20,33 +20,9 @@ namespace ForumProject.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index(int id){
-            var post = _postService.GetById(id);
-            var replies = post.PostReplies.Select(reply => new PostReplyModel {
-                Id = reply.Id,
-                AuthorName = reply.User.UserName,
-                AuthorId = reply.User.Id,
-                AuthorImageUrl = reply.User.ProfileImageUrl,
-                AuthorRating = (int)reply.User.Rating,
-                Content = reply.Content,
-                CreatedAt = reply.CreateTime,
-                PostId = post.Id
-            });
-            var user = post.User;
-            var model = new PostIndexModel
-            {
-                Id = post.Id,
-                Title = post.Title,
-                AuthorId = post.User.Id,
-                AuthorName = user.UserName!,
-                AuthorImageUrl = post.User.ProfileImageUrl!,
-                AuthorRating = (int)post.User.Rating!,
-                CreatedAt = post.CreateTime,
-                Content = post.Content,
-                Replies = replies,
-                ForumName = post.Forum.Title,
-                ForumId = post.Forum.Id
-            };
+        public IActionResult Index(int id)
+        {
+            PostIndexModel model = constructPostIndexModel(id);
             return View(model);
         }
 
@@ -74,6 +50,45 @@ namespace ForumProject.Controllers
             };
             await _postService.Add(post);
             return RedirectToAction("Index","Post", new {id = post.Id});
+        }
+
+        public async Task<IActionResult> addComment(int postId,string replyContent){
+
+            await _postService.addPostComment(postId, replyContent);
+            return RedirectToAction("Index","Post", new {id = postId});
+        }
+
+        private PostIndexModel constructPostIndexModel(int id)
+        {
+            var post = _postService.GetById(id);
+            var user = post.User;
+            var replies = post.PostReplies.Select(reply => new PostReplyModel
+            {
+                Id = reply.Id,
+                AuthorName = reply.User.UserName,
+                AuthorId = reply.User.Id,
+                AuthorImageUrl = reply.User.ProfileImageUrl,
+                AuthorRating = (int)reply.User.Rating,
+                Content = reply.Content,
+                CreatedAt = reply.CreateTime,
+                PostId = post.Id
+            });
+            
+            var model = new PostIndexModel
+            {
+                Id = post.Id,
+                Title = post.Title,
+                AuthorId = post.User.Id,
+                AuthorName = user.UserName!,
+                AuthorImageUrl = post.User.ProfileImageUrl!,
+                AuthorRating = (int)post.User.Rating!,
+                CreatedAt = post.CreateTime,
+                Content = post.Content,
+                Replies = replies,
+                ForumName = post.Forum.Title,
+                ForumId = post.Forum.Id
+            };
+            return model;
         }
     }
 }

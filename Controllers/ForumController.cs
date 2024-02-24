@@ -10,10 +10,13 @@ namespace ForumProject.Controllers
     {
         private readonly IForumService _forumService;
         private readonly IPostService _postService;
+        private readonly ISearchService _searchService;
 
-        public ForumController(IForumService forumService)
+        public ForumController(IForumService forumService, ISearchService searchService, IPostService postService)
         {
             _forumService = forumService;
+            _searchService = searchService;
+            _postService = postService;
         }
 
         public IActionResult Index(){
@@ -24,14 +27,12 @@ namespace ForumProject.Controllers
                 Name = forum.Title,
                 Description = forum.Description,
             });
-
             var forumIndex = new ForumIndexModel { ForumList = forums };
             return View(forumIndex);
         }
 
-        public IActionResult Topic(int id, string searchQuery){
+        public IActionResult Topic(int id){
             var forum = _forumService.GetById(id);
-            Console.WriteLine($"Forum id : {forum.Id}");
             var posts = forum.Posts;
             var postListings = posts.Select(post => new PostListModel
             {
@@ -66,12 +67,8 @@ namespace ForumProject.Controllers
 
         [HttpPost]
         public IActionResult Search(int Id, string searchQuery){
-            Console.WriteLine($"Forum id : {Id}, searchQuery : {searchQuery}");
             var forum = _forumService.GetById(Id);
-            var postsByQuery = forum.Posts.Where(p => 
-                p.Title.Contains(searchQuery,StringComparison.CurrentCultureIgnoreCase) || p.Content.Contains(searchQuery,StringComparison.CurrentCultureIgnoreCase)
-                
-            ).Select(post => new PostListModel
+            var searchResult =_searchService.getPostsInForumByQuery(Id,searchQuery).Select(post => new PostListModel
             {
                 Id = post.Id,
                 AuthorId = post.User.Id,
@@ -89,7 +86,7 @@ namespace ForumProject.Controllers
             }).ToList();
             var topicModel = new ForumTopicModel
             {
-                Posts = postsByQuery,
+                Posts = searchResult,
                 Forum = new ForumViewModel
                 {
                     Id = forum.Id,
