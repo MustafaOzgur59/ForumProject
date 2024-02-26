@@ -25,7 +25,11 @@
                             @if(listing.ReplyCount == 0) {
                                 <span>No Replies</span>
                             } else {
-                                <span>@listing.ReplyCount @listing.ReplyCount > 1 ? "replies" : "reply"</span>
+                                @if(listing.ReplyCount == 1){
+                                    <span>@listing.ReplyCount reply</span>
+                                } else {
+                                    <span>@listing.ReplyCount replies</span>
+                                }
                             }
                             <span class="user">
                                 <a asp-action="Detail" asp-controller="Profile" asp-route-id="@listing.AuthorId">@listing.AuthorName</a>

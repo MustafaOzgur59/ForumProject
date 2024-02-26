@@ -2,7 +2,10 @@
 
 <div class="d-flex flex-align-items-center">
     <span class="fw-bold fs-3 px-3">Forums</span>
-    <a asp-action="Create" asp-controller="Forum" class="btn btn-primary m-2">Create Forum</a>
+    @if(User.IsInRole("Admin")){
+        <a asp-action="Create" asp-controller="Forum" class="btn btn-primary m-2">Create Forum</a>
+    }
+    
 </div>
 <table class="table table-hover" id="forumTable">
     <tbody>

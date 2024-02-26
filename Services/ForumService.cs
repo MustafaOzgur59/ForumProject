@@ -17,9 +17,10 @@ namespace ForumProject.Services
             _applicationDbContext = applicationDbContext;
         }
 
-        public Task Create(Forum forum)
+        public async Task Create(Forum forum)
         {
-            throw new NotImplementedException();
+            await _applicationDbContext.Forums.AddAsync(forum);
+            await _applicationDbContext.SaveChangesAsync();
         }
 
         public Task Delete(int forumId)

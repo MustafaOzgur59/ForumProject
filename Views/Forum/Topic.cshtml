@@ -4,10 +4,10 @@
     <div class="row sectionHeader mb-2">
         <div class="fw-bold fs-3"> 
             <div class="forumLogo" style="background-image: url(@Model.Forum.ImageUrl);"></div>
-            <span style="height: 100%;">Welcome to the @Model.Forum.Name Forum</span>
+            <span style="height: 100%; color: white;">Welcome to the @Model.Forum.Name Forum</span>
             @if(User.Identity.IsAuthenticated){
             <span class="btn btn-primary">
-                <a asp-controller="Post" asp-action="Create" class="text-black fw-bold" asp-route-id="@Model.Forum.Id">Create Post</a>
+                <a asp-controller="Post" asp-action="Create" class="text-white fw-bold" asp-route-id="@Model.Forum.Id">Create Post</a>
             </span class="btn btn-primary">
         }
         </div>
@@ -33,13 +33,13 @@
                                         <a asp-action="Index" asp-controller="Post" asp-route-id="@post.Id">@post.Title</a>
                                     </div>
                                     <div class="postAuthorData">
-                                        <div>
+                                        <div class="d-flex flex-column">
                                             <span class="postAuthor">
                                                 Author :
                                                 <a asp-action="Detail" asp-controller="Profile" asp-route-id="@post.AuthorId">  @post.AuthorName</a>
                                             </span>
                                             <span class="authorRating"> Rating : @post.AuthorRating</span>
-                                            <span class="postDate"> Date : @post.DatePosted</span>
+                                            <span class="postDate"> Date : @post.DatePosted.ToString("dd.MM.yyyy HH:mm")</span>
                                         </div>
                                     </div>
                                 </div>

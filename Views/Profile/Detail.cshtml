@@ -49,5 +49,45 @@
                 </span>
             </div>
         </div>
+        <div class="row postContent">
+            <h3>My posts</h3>
+        @if(Model.Posts.Any()){
+            <table class="table table-hover table-bordered" id="userPosts">
+                <tbody>
+                    <p class="text-end">Reply Count</p>
+                    @foreach(var post in Model.Posts){
+                        <tr>
+                            <td>
+                                <div class="postData">
+                                    <div class="postTitle">
+                                        <a asp-action="Index" asp-controller="Post" asp-route-id="@post.Id">@post.Title</a>
+                                    </div>
+                                    <div class="postAuthorData">
+                                        <div>
+                                            <span class="postAuthor">
+                                                Author :
+                                                <a asp-action="Detail" asp-controller="Profile" asp-route-id="@post.AuthorId">  @post.AuthorName</a>
+                                            </span>
+                                            <span class="authorRating"> Rating : @post.AuthorRating</span>
+                                            <span class="postDate"> Date : @post.DatePosted</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="postReplyCount">
+                                    @post.ReplyCount
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        } else{
+            <div class="noPosts">
+                You haven't posted any post yet.
+            </div>
+        }
+    </div>
     }
 </div>

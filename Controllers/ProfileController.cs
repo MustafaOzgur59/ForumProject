@@ -29,7 +29,6 @@ namespace ForumProject.Controllers
             var user = _userService.getById(id);
             var userRoles = _userManager.GetRolesAsync(user).Result;
             var posts = _postService.GetByUser(id);
-            Console.WriteLine($"Profile detay sayfasina cagirildi {user.UserName}");
             var postListings = posts.Select(post => new PostListModel
             {
                 Id = post.Id,

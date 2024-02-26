@@ -21,6 +21,9 @@ namespace ForumProject.Controllers
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Login(){
+            if (User.Identity.IsAuthenticated) {
+                return RedirectToAction("Index", "Home");
+            }
             await _signInManager.SignOutAsync();
             return View();
         }
@@ -29,6 +32,9 @@ namespace ForumProject.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model){
+            if (User.Identity.IsAuthenticated) {
+                return RedirectToAction("Index", "Home");
+            }
             if (ModelState.IsValid){
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, true, false);
                 if (result.Succeeded){
@@ -44,7 +50,7 @@ namespace ForumProject.Controllers
             return View(model);
         }
 
-                [HttpGet]
+        [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Logout(){
             await _signInManager.SignOutAsync();
@@ -54,11 +60,17 @@ namespace ForumProject.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            if (User.Identity.IsAuthenticated) {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model){
+            if (User.Identity.IsAuthenticated) {
+                return RedirectToAction("Index", "Home");
+            }
             if (ModelState.IsValid)
             {
                 Console.WriteLine(model.Password);
@@ -70,13 +82,11 @@ namespace ForumProject.Controllers
                 }else {
                     foreach (var error in result.Errors)
                     {
-                        Console.WriteLine($"Error: {error.Code} - {error.Description}");
                         ModelState.AddModelError("", $"Invalid register attempt: {error.Description}.");
                     }
                     return View(model);
                 }  
             }
-            ModelState.AddModelError("","Invalid register attempt2.");
             return View(model);
         }
     }

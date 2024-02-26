@@ -97,5 +97,31 @@ namespace ForumProject.Controllers
             };
             return View("Topic", topicModel);
         }
+
+        public IActionResult Create(){
+            if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                return View();
+            } else {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        public async Task<IActionResult> Create(CreateForumModel model){
+            if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+            {
+                var forum = new Forum
+                {
+                    CreateTime = DateTime.Now,
+                    Description = model.Description,
+                    Title = model.Title,
+                    ImageUrl = "/images/forum/rust.png"
+                };
+                await _forumService.Create(forum);
+                return RedirectToAction("Index", "Forum");
+            } else {
+                return RedirectToAction("Index", "Home");
+            }
+        }
     }
 }
