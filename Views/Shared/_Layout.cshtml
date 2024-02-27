@@ -31,7 +31,7 @@
                     <ul class="ms-auto navbar-nav">
                        @if(User.Identity!.IsAuthenticated){
                             <li class="nav-item">
-                                <a href="#" class="nav-link font-weight-bold text-dark">@User.Identity.Name</a>
+                                <a asp-action="Detail" asp-controller="Profile" class="nav-link font-weight-bold text-dark">@User.Identity.Name</a>
                             </li>
                             <li class="dropdown">
                                 <button class="btn dropdown-toggle " type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">

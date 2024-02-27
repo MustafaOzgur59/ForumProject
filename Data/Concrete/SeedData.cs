@@ -51,7 +51,7 @@ namespace BloggApp.Data.Concrete.EfCore
                         Email = "info@ahmet.com",
                         IsActive = true,
                         UserName = "ForumAdmin",
-                        ProfileImageUrl = "/images/user/python.jpg",
+                        ProfileImageUrl = "/images/user/1.jpg",
                         Rating = random.Next(1, 5),
                     }, "Deneme123!");
                     await _userManager.CreateAsync(new User
@@ -60,7 +60,7 @@ namespace BloggApp.Data.Concrete.EfCore
                         Email = "info@ahmet.com",
                         IsActive = true,
                         UserName = "ahmet",
-                        ProfileImageUrl = "/images/user/python.jpg",
+                        ProfileImageUrl = "/images/user/2.jpg",
                         Rating = random.Next(1, 5)
                     }, "Deneme123!");
                     await _userManager.CreateAsync(new User
@@ -69,7 +69,7 @@ namespace BloggApp.Data.Concrete.EfCore
                         Email = "info@mozgur.com",
                         IsActive = true,
                         UserName = "mozgur",
-                        ProfileImageUrl = "/images/user/python.jpg",
+                        ProfileImageUrl = "/images/user/3.jpg",
                         Rating = random.Next(1, 5)
                     }, "Deneme123!");
                     await _userManager.CreateAsync(new User
@@ -78,7 +78,7 @@ namespace BloggApp.Data.Concrete.EfCore
                         Email = "info@elif.com",
                         IsActive = true,
                         UserName = "elif",
-                        ProfileImageUrl = "/images/user/python.jpg",
+                        ProfileImageUrl = "/images/user/4.jpg",
                         Rating = random.Next(1, 5)
                     }, "Deneme123!");
                     await _userManager.CreateAsync(new User
@@ -87,7 +87,7 @@ namespace BloggApp.Data.Concrete.EfCore
                         Email = "info@hasan.com",
                         IsActive = true,
                         UserName = "hasan",
-                        ProfileImageUrl = "/images/user/python.jpg",
+                        ProfileImageUrl = "/images/user/5.jpg",
                         Rating = random.Next(1, 5)
                     }, "Deneme123!");
                     await _userManager.CreateAsync(new User
@@ -96,7 +96,7 @@ namespace BloggApp.Data.Concrete.EfCore
                         Email = "info@cemre.com",
                         IsActive = true,
                         UserName = "cemre",
-                        ProfileImageUrl = "/images/user/python.jpg",
+                        ProfileImageUrl = "/images/user/6.jpg",
                         Rating = random.Next(1, 5)
                     }, "Deneme123!");
                     await _userManager.CreateAsync(new User
@@ -105,7 +105,7 @@ namespace BloggApp.Data.Concrete.EfCore
                         Email = "info@abdullah.com",
                         IsActive = true,
                         UserName = "abdullah",
-                        ProfileImageUrl = "/images/user/python.jpg",
+                        ProfileImageUrl = "/images/user/5.jpg",
                         Rating = random.Next(1, 5)
                     }, "Deneme123!");
                     await _userManager.CreateAsync(new User
@@ -114,7 +114,7 @@ namespace BloggApp.Data.Concrete.EfCore
                         Email = "info@omer.com",
                         IsActive = true,
                         UserName = "omer",
-                        ProfileImageUrl = "/images/user/python.jpg",
+                        ProfileImageUrl = "/images/user/3.jpg",
                         Rating = random.Next(1, 5)
                     }, "Deneme123!");
                     var admin = await _userManager.FindByNameAsync("ForumAdmin");
@@ -166,128 +166,51 @@ namespace BloggApp.Data.Concrete.EfCore
                         },
                         new Post
                         {
-                            Content = "First Python Post content",
+                            Content = "Hello everyone I can't seem to use ViewBag whatever I try can you help me",
                             CreateTime = DateTime.Now,
-                            Title = "First Python post",
-                            User = context.Users.Where(user => user.UserName == "ahmet").First(),
-                            Forum = context.Forums.Where(f => f.Id == 1).First()
+                            Title = "How can I use ViewBag",
+                            User = context.Users.Where(user => user.UserName == "mozgur").First(),
+                            Forum = context.Forums.Where(f => f.Id == 2).First()
                         },
                         new Post
                         {
-                            Content = "Content",
+                            Content = "Hey There. Can you rate my application.",
                             CreateTime = DateTime.Now,
-                            Title = "Python Ml",
-                            User = context.Users.Where(user => user.UserName == "omer").First(),
-                            Forum = context.Forums.Where(f => f.Id == 1).First()
-                        },
-                        new Post
-                        {
-                            Content = "Snake game using python",
-                            CreateTime = DateTime.Now,
-                            Title = "Snake Game",
-                            User = context.Users.Where(user => user.UserName == "elif").First(),
-                            Forum = context.Forums.Where(f => f.Id == 1).First()
-                        },
-                        new Post
-                        {
-                            Content = "I cant seem to call matplotlib",
-                            CreateTime = DateTime.Now,
-                            Title = "How to fix this bug???",
+                            Title = "I made a forum application",
                             User = context.Users.Where(user => user.UserName == "ForumAdmin").First(),
-                            Forum = context.Forums.Where(f => f.Id == 1).First()
-                        },
-                        new Post
-                        {
-                            Content = "First Python Post content",
-                            CreateTime = DateTime.Now,
-                            Title = "First Python post",
-                            User = context.Users.Where(user => user.UserName == "ahmet").First(),
-                            Forum = context.Forums.Where(f => f.Id == 1).First()
-                        },
-                        new Post
-                        {
-                            Content = "Content",
-                            CreateTime = DateTime.Now,
-                            Title = "Python Ml",
-                            User = context.Users.Where(user => user.UserName == "omer").First(),
-                            Forum = context.Forums.Where(f => f.Id == 1).First()
-                        },
-                        new Post
-                        {
-                            Content = "Snake game using python",
-                            CreateTime = DateTime.Now,
-                            Title = "Snake Game",
-                            User = context.Users.Where(user => user.UserName == "elif").First(),
-                            Forum = context.Forums.Where(f => f.Id == 1).First()
-                        },
-                        new Post
-                        {
-                            Content = "Pandas is a library used in data manipulation",
-                            CreateTime = DateTime.Now,
-                            Title = "How to use pandas",
-                            User = context.Users.Where(user => user.UserName == "betul").First(),
-                            Forum = context.Forums.Where(f => f.Id == 1).First()
-                        },
-                        new Post
-                        {
-                            Content = "I cant seem to call matplotlib",
-                            CreateTime = DateTime.Now,
-                            Title = "How to fix this bug???",
-                            User = context.Users.Where(user => user.UserName == "ForumAdmin").First(),
-                            Forum = context.Forums.Where(f => f.Id == 1).First()
-                        },
-                        new Post
-                        {
-                            Content = "First Python Post content",
-                            CreateTime = DateTime.Now,
-                            Title = "First Python post",
-                            User = context.Users.Where(user => user.UserName == "ahmet").First(),
-                            Forum = context.Forums.Where(f => f.Id == 1).First()
-                        },
-                        new Post
-                        {
-                            Content = "Content",
-                            CreateTime = DateTime.Now,
-                            Title = "Python Ml",
-                            User = context.Users.Where(user => user.UserName == "omer").First(),
-                            Forum = context.Forums.Where(f => f.Id == 1).First()
-                        },
-                        new Post
-                        {
-                            Content = "Snake game using python",
-                            CreateTime = DateTime.Now,
-                            Title = "Snake Game",
-                            User = context.Users.Where(user => user.UserName == "elif").First(),
-                            Forum = context.Forums.Where(f => f.Id == 1).First()
-                        },
-                        new Post
-                        {
-                            Content = "Pandas is a library used in data manipulation",
-                            CreateTime = DateTime.Now,
-                            Title = "How to use pandas",
-                            User = context.Users.Where(user => user.UserName == "betul").First(),
-                            Forum = context.Forums.Where(f => f.Id == 1).First()
-                        },
-                        new Post
-                        {
-                            Content = "I cant seem to call matplotlib",
-                            CreateTime = DateTime.Now,
-                            Title = "How to fix this bug???",
-                            User = context.Users.Where(user => user.UserName == "ForumAdmin").First(),
-                            Forum = context.Forums.Where(f => f.Id == 1).First()
+                            Forum = context.Forums.Where(f => f.Id == 2).First()
                         }
+                        
                     );
-                    if (!context.PostReplies.Any())
+                    context.SaveChanges();
+                }
+                if (!context.PostReplies.Any())
                     {
                         context.PostReplies.AddRange(
                             new PostReply
                             {
-
+                                Post = context.Posts.Where(post => post.Id == 1).First(),
+                                User = context.Users.Where(user => user.UserName == "mozgur").First(),
+                                CreateTime = DateTime.Now,
+                                Content = " Tebrikler calisiyor."
+                            },
+                            new PostReply
+                            {
+                                Post = context.Posts.Where(post => post.Id == 3).First(),
+                                User = context.Users.Where(user => user.UserName == "omer").First(),
+                                CreateTime = DateTime.Now,
+                                Content = "Hangi libraryleri kullandin.Ben de bir ara tetris yapmayi denemistim."
+                            },
+                            new PostReply
+                            {
+                                Post = context.Posts.Where(post => post.Id == 5).First(),
+                                User = context.Users.Where(user => user.UserName == "ForumAdmin").First(),
+                                CreateTime = DateTime.Now,
+                                Content = " pip install matplotlib sonra import matplotlib as plt"
                             }
                         );
                         context.SaveChanges();
                     }
-                }
             }
         }
     }

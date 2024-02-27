@@ -254,3 +254,6 @@ C:\Users\Mustafa\Desktop\ASP.net\ForumProject\bin\Debug\net8.0\runtimes\win\lib\
 C:\Users\Mustafa\Desktop\ASP.net\ForumProject\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Mustafa\Desktop\ASP.net\ForumProject\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
 C:\Users\Mustafa\Desktop\ASP.net\ForumProject\obj\Debug\net8.0\ForumProject.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Mustafa\Desktop\ASP.net\ForumProject\bin\Debug\net8.0\Azure.Storage.Blobs.dll
+C:\Users\Mustafa\Desktop\ASP.net\ForumProject\bin\Debug\net8.0\Azure.Storage.Common.dll
+C:\Users\Mustafa\Desktop\ASP.net\ForumProject\bin\Debug\net8.0\System.IO.Hashing.dll

@@ -17,12 +17,16 @@ namespace ForumProject.Controllers
         private readonly UserManager<User> _userManager;
         private readonly IUserService _userService;
         private readonly IPostService _postService;
+        private readonly IUploadService _uploadService;
+        private readonly IConfiguration _configuration;
 
-        public ProfileController(IUserService userService, UserManager<User> userManager, IPostService postService)
+        public ProfileController(IUserService userService, UserManager<User> userManager, IPostService postService, IConfiguration configuration, IUploadService uploadService)
         {
             _userService = userService;
             _userManager = userManager;
             _postService = postService;
+            _configuration = configuration;
+            _uploadService = uploadService;
         }
 
         public IActionResult Detail(string id){
@@ -57,6 +61,14 @@ namespace ForumProject.Controllers
             };
             
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadProfileImage(IFormFile file){
+            var userId = _userManager.GetUserId(User);
+            var image_uri = await _uploadService.UploadImageAndGetUriAsync($"{userId}_{file.FileName}", file.OpenReadStream());
+            await _userService.SetProfileImage(userId,new Uri(image_uri));
+            return RedirectToAction("Detail","Profile", new {id = userId});
         }
     }
 }

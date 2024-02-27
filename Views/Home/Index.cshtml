@@ -19,7 +19,7 @@
             @foreach(var listing in Model.LatestPosts){
                 <tr>
                     <td>
-                        <div class="forumLogo" style="background-image: url(@listing.Forum.ImageUrl);"></div>
+                        <div class="forumLogo" style="background-image: url(@listing.Forum.ImageUrl)"></div>
                         <div class="title"><a asp-action="Index" asp-controller="Post" asp-route-id="@listing.Id">@listing.Title</a></div>
                         <div class="replyCount">
                             @if(listing.ReplyCount == 0) {

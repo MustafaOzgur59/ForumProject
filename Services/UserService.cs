@@ -30,7 +30,7 @@ namespace ForumProject.Services
         public async Task SetProfileImage(string id, Uri uri)
         {
             var user = getById(id);
-            user.ProfileImageUrl = uri.AbsolutePath;
+            user.ProfileImageUrl = uri.AbsoluteUri;
             _context.Update(user);
             await _context.SaveChangesAsync();
         }

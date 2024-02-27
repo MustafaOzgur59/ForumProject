@@ -19,6 +19,7 @@ builder.Services.AddScoped<IForumService, ForumService>();
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<ISearchService, SearchService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUploadService, UploadService>();
 builder.Services.AddIdentity<User, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddSignInManager<SignInManager<User>>()

@@ -41,12 +41,32 @@
       "PackagePath": "staticwebassets\\images\\forum\\python.jpg"
     },
     {
-      "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\images\\forum\\rust.png",
-      "PackagePath": "staticwebassets\\images\\forum\\rust.png"
+      "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\images\\forum\\rust.jpg",
+      "PackagePath": "staticwebassets\\images\\forum\\rust.jpg"
     },
     {
-      "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\images\\user\\python.jpg",
-      "PackagePath": "staticwebassets\\images\\user\\python.jpg"
+      "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\images\\user\\1.jpg",
+      "PackagePath": "staticwebassets\\images\\user\\1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\images\\user\\2.jpg",
+      "PackagePath": "staticwebassets\\images\\user\\2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\images\\user\\3.jpg",
+      "PackagePath": "staticwebassets\\images\\user\\3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\images\\user\\4.jpg",
+      "PackagePath": "staticwebassets\\images\\user\\4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\images\\user\\5.jpg",
+      "PackagePath": "staticwebassets\\images\\user\\5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\images\\user\\6.jpg",
+      "PackagePath": "staticwebassets\\images\\user\\6.jpg"
     },
     {
       "Id": "C:\\Users\\Mustafa\\Desktop\\ASP.net\\ForumProject\\wwwroot\\js\\site.js",
